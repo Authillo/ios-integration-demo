@@ -13,6 +13,7 @@
 		2EB1518929AAC12E00C0AF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518729AAC12E00C0AF50 /* Main.storyboard */; };
 		2EB1518B29AAC12F00C0AF50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */; };
 		2EB1518E29AAC12F00C0AF50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518C29AAC12F00C0AF50 /* LaunchScreen.storyboard */; };
+		2EF4498529AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EB1518D29AAC12F00C0AF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EB1518F29AAC12F00C0AF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructAuthilloLoginUrl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				2EB1518129AAC12E00C0AF50 /* AppDelegate.swift */,
 				2EB1518329AAC12E00C0AF50 /* SceneDelegate.swift */,
 				2EB1518529AAC12E00C0AF50 /* ViewController.swift */,
+				2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */,
 				2EB1518729AAC12E00C0AF50 /* Main.storyboard */,
 				2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */,
 				2EB1518C29AAC12F00C0AF50 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EB1518629AAC12E00C0AF50 /* ViewController.swift in Sources */,
+				2EF4498529AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift in Sources */,
 				2EB1518229AAC12E00C0AF50 /* AppDelegate.swift in Sources */,
 				2EB1518429AAC12E00C0AF50 /* SceneDelegate.swift in Sources */,
 			);
