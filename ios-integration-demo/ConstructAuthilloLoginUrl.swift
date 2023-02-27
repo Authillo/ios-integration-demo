@@ -27,8 +27,8 @@ public class Authillo:NSObject{
     ///   - codeChallenge: The hashed version of the codeVerifier. The codeVerifier is a secret random string that should be stored on your backend server to then be used to authorize your backend server's token request.
     ///   - redirectURI: The url that the user will be redirected back to. Must exactly match one of the redirect url's you entered in your platform configuration. This value defaults to your app's bundle identifier suffixed with "://"
     ///   - state: A string that will be included in the query parameters of the user when redirected back. This can be used to store some state relevant to the user between redirects (ex: the page they were on before logging in).
-    public func AuthorizeUser(scopes:[Scopes],maxAge:Int = 3600,state:String?,codeChallenge:String? = nil, redirectURI: String? = nil){
-        var formattedScopes = scopes.reduce("openid") { partialResult, scope in
+    public func AuthorizeUser(scopes:[Scopes],maxAge:Int = 3600,state:String?,codeChallenge:String?, redirectURI: String? ){
+        let formattedScopes = scopes.reduce("openid") { partialResult, scope in
             return partialResult + " \(scope)"
         }
         var resolvedCodeChallenge: String = SHA256.hash(data: Data("UNSAFECODEVERIFIER".utf8)).compactMap { String(format: "%02x", $0)}.joined()
@@ -37,8 +37,11 @@ public class Authillo:NSObject{
         }else{
             resolvedCodeChallenge = codeChallenge ?? resolvedCodeChallenge
         }
-        let resolvedRedirectUri = redirectURI ?? ((Bundle.main.bundleIdentifier ?? "bundleidentifierwasnil") + "://")
-        guard let authillourl = URL(string: "https://authillo.com/authorize?response_type=code&client_id=\(self.clientId)&scope=\(formattedScopes)&state=\(state ?? "undefined")&redirect_uri=\(resolvedRedirectUri)&max_age=\(maxAge)&code_challenge=\(resolvedCodeChallenge)&code_challenge_method=S256") else { print("ERROR - failed to generate authilloauthorize URL")
+//        let resolvedRedirectUri = redirectURI ?? ((Bundle.main.bundleIdentifier ?? "bundleidentifierwasnil") + "://")
+        let resolvedRedirectUri = redirectURI ?? { if(Bundle.main.bundleIdentifier != nil) {return "\(Bundle.main.bundleIdentifier!)://" }else {return "bundleidentifierwasnil" }}()
+        var urlString = "https://authillo.com/authorize?response_type=code&client_id=\(self.clientId)&scope=\(formattedScopes)&state=\(state ?? "undefined")&redirect_uri=\(resolvedRedirectUri)&max_age=\(maxAge)&code_challenge=\(resolvedCodeChallenge)&code_challenge_method=S256"
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        guard let authillourl = URL( string: urlString) else { print("ERROR - failed to generate authilloauthorize URL")
             return
         }
         UIApplication.shared.open(authillourl)

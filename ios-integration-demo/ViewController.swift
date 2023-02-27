@@ -6,10 +6,13 @@
 //
 
 import UIKit
+let AuthilloInstance = Authillo(clientId: "CffyNFDb5MDQTVCkOeCyzMyMTEE1hh7SGBAQjeMmFz4")
 
 class ViewController: UIViewController {
     @IBAction func LoginButtonClicked(_ sender: UIButton) {
-//        UIApplication.shared.open("authillo.com")
+//        AuthilloInstance.AuthorizeUser(scopes: [.license], state: "")
+        AuthilloInstance.AuthorizeUser(scopes: [.license], state: nil, codeChallenge: nil, redirectURI: nil)
+        
     }
     
     override func viewDidLoad() {
