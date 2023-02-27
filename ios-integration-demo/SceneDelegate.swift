@@ -14,6 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("returned from authorize", URLContexts)
+        for elem in URLContexts {
+//            print("element in URLContexts set",elem.url)
+            AuthilloInstance.HandleReturnFromAuthorization(url: elem.url)
+        }
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

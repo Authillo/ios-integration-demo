@@ -37,7 +37,6 @@ public class Authillo:NSObject{
         }else{
             resolvedCodeChallenge = codeChallenge ?? resolvedCodeChallenge
         }
-//        let resolvedRedirectUri = redirectURI ?? ((Bundle.main.bundleIdentifier ?? "bundleidentifierwasnil") + "://")
         let resolvedRedirectUri = redirectURI ?? { if(Bundle.main.bundleIdentifier != nil) {return "\(Bundle.main.bundleIdentifier!)://" }else {return "bundleidentifierwasnil" }}()
         var urlString = "https://authillo.com/authorize?response_type=code&client_id=\(self.clientId)&scope=\(formattedScopes)&state=\(state ?? "undefined")&redirect_uri=\(resolvedRedirectUri)&max_age=\(maxAge)&code_challenge=\(resolvedCodeChallenge)&code_challenge_method=S256"
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -45,6 +44,15 @@ public class Authillo:NSObject{
             return
         }
         UIApplication.shared.open(authillourl)
+        
+    }
+    func HandleReturnFromAuthorization(url:URL){
+        print("user returned from authorization with url = ",url)
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
+        let AuthorizationCode = urlComponents.queryItems?.first(where: {$0.name == "code"})?.value
+        let state = urlComponents.queryItems?.first(where: {$0.name == "state"})?.value
+        print("AuthorizationCode \(AuthorizationCode ?? "")")
+        print("state \(state ?? "")")
         
     }
 }
