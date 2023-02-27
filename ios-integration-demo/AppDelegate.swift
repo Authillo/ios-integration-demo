@@ -11,6 +11,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    
+    func application(
+        _ app: UIApplication,
+        open url: URL,
+        options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+        print("test")
+        return true
+    }
+    
+    func application(){
+        print("generic app")
+    }
+    func onOpenURL(perform action: @escaping (URL) -> ()) -> Any{
+        print("onOpen called")
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
