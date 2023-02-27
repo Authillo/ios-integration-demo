@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CryptoKit
+import UIKit
 
 
 public enum Scopes {
@@ -24,7 +26,21 @@ public class Authillo:NSObject{
     ///   - maxAge: How long the token should be valid for in seconds.
     ///   - codeChallenge: The hashed version of the codeVerifier. The codeVerifier is a secret random string that should be stored on your backend server to then be used to authorize your backend server's token request.
     ///   - redirectURI: The url that the user will be redirected back to. Must exactly match one of the redirect url's you entered in your platform configuration. This value defaults to your app's bundle identifier suffixed with "://"
-    public func AuthorizeUser(scopes:[Scopes],maxAge:Int,codeChallenge:String? = nil, redirectURI: String? = nil){
+    public func AuthorizeUser(scopes:[Scopes],maxAge:Int = 3600,codeChallenge:String? = nil, redirectURI: String? = nil){
+        var formattedScopes = scopes.reduce("openid") { partialResult, scope in
+            return partialResult + " \(scope)"
+        }
+        var resolvedCodeChallenge: String = SHA256.hash(data: Data("UNSAFECODEVERIFIER".utf8)).compactMap { String(format: "%02x", $0)}.joined()
+        if(codeChallenge == nil){
+            print("WARNING - code challenge missing, you should make sure to generate & store a code_verifier on your backend for your user then generate a hash of the code_verifier using SHA256 and share the hash with your client here as code_challenge")
+        }else{
+            resolvedCodeChallenge = codeChallenge ?? resolvedCodeChallenge
+        }
+        let resolvedRedirectUri = redirectURI ?? ((Bundle.main.bundleIdentifier ?? "bundleidentifierwasnil") + "://")
+        guard let authillourl = URL(string: "https://authillo.com/authorize?response_type=code&client_id=\(self.clientId)&scope=\(formattedScopes)&state=undefined&redirect_uri=\(resolvedRedirectUri)&max_age=\(maxAge)&code_challenge=\(resolvedCodeChallenge)&code_challenge_method=S256") else { print("ERROR - failed to generate authilloauthorize URL")
+            return
+        }
+        UIApplication.shared.open(authillourl)
         
     }
 //    public func LoginWithAuthillo(){
