@@ -26,6 +26,15 @@
                                     <action selector="LoginButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xVY-i3-3Nh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1g2-sa-oll">
+                                <rect key="frame" x="113" y="335" width="168" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="GetCodeChallenge"/>
+                                <connections>
+                                    <action selector="GetCodeButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B95-KI-r0c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

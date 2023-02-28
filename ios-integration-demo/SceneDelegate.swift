@@ -13,10 +13,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("returned from authorize", URLContexts)
         for elem in URLContexts {
-//            print("element in URLContexts set",elem.url)
-            AuthilloInstance.HandleReturnFromAuthorization(url: elem.url)
+            let url = elem.url
+            print("user returned from authorization with url = ",url)
+            guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
+            let AuthorizationCode = urlComponents.queryItems?.first(where: {$0.name == "code"})?.value
+            let state = urlComponents.queryItems?.first(where: {$0.name == "state"})?.value
+            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "")
         }
     }
 

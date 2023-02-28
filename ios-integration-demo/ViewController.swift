@@ -9,9 +9,12 @@ import UIKit
 let AuthilloInstance = Authillo(clientId: "CffyNFDb5MDQTVCkOeCyzMyMTEE1hh7SGBAQjeMmFz4")
 
 class ViewController: UIViewController {
+    @IBAction func GetCodeButtonClicked(_ sender: UIButton) {
+        AuthilloInstance.GetCodeChallenge()
+    }
     @IBAction func LoginButtonClicked(_ sender: UIButton) {
 //        AuthilloInstance.AuthorizeUser(scopes: [.license], state: "")
-        AuthilloInstance.AuthorizeUser(scopes: [.license], state: nil, codeChallenge: nil, redirectURI: nil)
+        AuthilloInstance.AuthorizeUser(scopes: [.license], state: nil, redirectURI: nil)
         
     }
     
