@@ -19,7 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
             let AuthorizationCode = urlComponents.queryItems?.first(where: {$0.name == "code"})?.value
             let state = urlComponents.queryItems?.first(where: {$0.name == "state"})?.value
-            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "")
+            
+            //todo: if u can make this function called from the MainViewController, then we can pass a uiCallback. As the callback is defined within MainVC, then we can either unhide a button for RequestUserInfo, or if that's not implemented, we can immediately occupy the view with the userInfo.
+            //In the latter case, we'd have to add parameters into uiCallback so that userInfo can be passed to MainVC. For example, see the uiCallback for GetCodeChallenge; that uiCallback has a String parameter, and then it's function body is set in MainVC.
+            //I've left you a label for userInfo that should be okay to receive a json.
+            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "", uiCallback: nil)
+            
         }
     }
 

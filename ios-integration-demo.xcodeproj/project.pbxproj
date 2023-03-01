@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		2EB1518229AAC12E00C0AF50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB1518129AAC12E00C0AF50 /* AppDelegate.swift */; };
 		2EB1518429AAC12E00C0AF50 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB1518329AAC12E00C0AF50 /* SceneDelegate.swift */; };
-		2EB1518629AAC12E00C0AF50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB1518529AAC12E00C0AF50 /* ViewController.swift */; };
+		2EB1518629AAC12E00C0AF50 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB1518529AAC12E00C0AF50 /* MainViewController.swift */; };
 		2EB1518929AAC12E00C0AF50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518729AAC12E00C0AF50 /* Main.storyboard */; };
 		2EB1518B29AAC12F00C0AF50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */; };
 		2EB1518E29AAC12F00C0AF50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB1518C29AAC12F00C0AF50 /* LaunchScreen.storyboard */; };
 		2EF4498529AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */; };
+		6051DC9729AF13610033660F /* TogglersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051DC9629AF13610033660F /* TogglersViewController.swift */; };
+		6051DC9B29AF2CF00033660F /* ScopesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051DC9A29AF2CF00033660F /* ScopesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EB1517E29AAC12E00C0AF50 /* ios-integration-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-integration-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EB1518129AAC12E00C0AF50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EB1518329AAC12E00C0AF50 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2EB1518529AAC12E00C0AF50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2EB1518529AAC12E00C0AF50 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2EB1518829AAC12E00C0AF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EB1518D29AAC12F00C0AF50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EB1518F29AAC12F00C0AF50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructAuthilloLoginUrl.swift; sourceTree = "<group>"; };
+		6051DC9629AF13610033660F /* TogglersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglersViewController.swift; sourceTree = "<group>"; };
+		6051DC9A29AF2CF00033660F /* ScopesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +64,14 @@
 			children = (
 				2EB1518129AAC12E00C0AF50 /* AppDelegate.swift */,
 				2EB1518329AAC12E00C0AF50 /* SceneDelegate.swift */,
-				2EB1518529AAC12E00C0AF50 /* ViewController.swift */,
+				2EB1518529AAC12E00C0AF50 /* MainViewController.swift */,
+				6051DC9629AF13610033660F /* TogglersViewController.swift */,
 				2EF4498429AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift */,
 				2EB1518729AAC12E00C0AF50 /* Main.storyboard */,
 				2EB1518A29AAC12F00C0AF50 /* Assets.xcassets */,
 				2EB1518C29AAC12F00C0AF50 /* LaunchScreen.storyboard */,
 				2EB1518F29AAC12F00C0AF50 /* Info.plist */,
+				6051DC9A29AF2CF00033660F /* ScopesManager.swift */,
 			);
 			path = "ios-integration-demo";
 			sourceTree = "<group>";
@@ -141,10 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EB1518629AAC12E00C0AF50 /* ViewController.swift in Sources */,
+				6051DC9B29AF2CF00033660F /* ScopesManager.swift in Sources */,
+				2EB1518629AAC12E00C0AF50 /* MainViewController.swift in Sources */,
 				2EF4498529AC0ECB00C52725 /* ConstructAuthilloLoginUrl.swift in Sources */,
 				2EB1518229AAC12E00C0AF50 /* AppDelegate.swift in Sources */,
 				2EB1518429AAC12E00C0AF50 /* SceneDelegate.swift in Sources */,
+				6051DC9729AF13610033660F /* TogglersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +299,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W289RX387;
+				DEVELOPMENT_TEAM = 67K2Z58W97;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-integration-demo/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -306,7 +314,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.authillo.ios-integration-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.authillo.ios-integration-demo-dz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -324,7 +332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3W289RX387;
+				DEVELOPMENT_TEAM = 67K2Z58W97;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-integration-demo/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -339,7 +347,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.authillo.ios-integration-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.authillo.ios-integration-demo-dz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

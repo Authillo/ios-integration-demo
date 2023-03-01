@@ -10,9 +10,6 @@ import CryptoKit
 import UIKit
 
 
-public enum Scopes {
-    case name,age,face,selfie,idphoto,email,phone,license,sex,birthdate
-}
 public class Authillo:NSObject{
     var clientId:String;
     var codeChallenge:String?;
@@ -30,7 +27,7 @@ public class Authillo:NSObject{
     ///   - codeChallenge: The hashed version of the codeVerifier. The codeVerifier is a secret random string that should be stored on your backend server to then be used to authorize your backend server's token request.
     ///   - redirectURI: The url that the user will be redirected back to. Must exactly match one of the redirect url's you entered in your platform configuration. This value defaults to your app's bundle identifier suffixed with "://"
     ///   - state: A string that will be included in the query parameters of the user when redirected back. This can be used to store some state relevant to the user between redirects (ex: the page they were on before logging in).
-    public func AuthorizeUser(scopes:[Scopes],maxAge:Int = 3600,state:String?, redirectURI: String? ){
+    public func AuthorizeUser(scopes:[Scope],maxAge:Int = 3600,state:String?, redirectURI: String? ){
         let formattedScopes = scopes.reduce("openid") { partialResult, scope in
             return partialResult + " \(scope)"
         }
@@ -48,7 +45,7 @@ public class Authillo:NSObject{
         UIApplication.shared.open(authillourl)
         
     }
-    func HandleReturnFromAuthorization(authorizationCode:String,state:String){
+    func HandleReturnFromAuthorization(authorizationCode:String,state:String, uiCallback: (() -> Void)?){
         print("handleReturnFromAuthorization function called " ,authorizationCode,state);
         guard let url = URL(string: "\(self.backendURL)/codeResponse?code=\(authorizationCode)&state=\(state)&makeUserInfoReq=true") else { return }
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
@@ -70,7 +67,7 @@ public class Authillo:NSObject{
         datatask.resume()
         
     }
-     func GetCodeChallenge() {
+    func GetCodeChallenge(uiCallback: ((String) -> Void)?) {
         guard let url = URL(string: "\(self.backendURL)/codechallenge") else { return }
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         request.httpMethod = "GET"
@@ -80,6 +77,9 @@ public class Authillo:NSObject{
                     let codeChallenge = try JSONSerialization.jsonObject(with: dat!, options: .fragmentsAllowed)
                     print(codeChallenge)
                     self.codeChallenge = codeChallenge as? String
+                    
+                    uiCallback?(self.codeChallenge ?? "")
+                    
                 } catch {
                     print("error parsing data")
                     print(dat!)
