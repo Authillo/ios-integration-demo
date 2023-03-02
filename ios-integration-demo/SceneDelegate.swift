@@ -15,19 +15,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         for elem in URLContexts {
             let url = elem.url
-            print("user returned from authorization with url = ",url)
+            print("\nRETURNED FROM AUTHORIZATION WITH URL: \(url)")
             guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
             let AuthorizationCode = urlComponents.queryItems?.first(where: {$0.name == "code"})?.value
             let state = urlComponents.queryItems?.first(where: {$0.name == "state"})?.value
             
-            //todo: if u can make this function called from the MainViewController, then we can pass a uiCallback. As the callback is defined within MainVC, then we can either unhide a button for RequestUserInfo, or if that's not implemented, we can immediately occupy the view with the userInfo.
-            //In the latter case, we'd have to add parameters into uiCallback so that userInfo can be passed to MainVC. For example, see the uiCallback for GetCodeChallenge; that uiCallback has a String parameter, and then it's function body is set in MainVC.
-            //I've left you a label for userInfo that should be okay to receive a json.
-            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "", uiCallback: nil)
-            
+            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "", initialCallback: initialCallback, responseCallback: responseCallback)
         }
     }
-
+    var initialCallback: ((String) -> Void)?
+    var responseCallback: (([String : Any]) -> Void)?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

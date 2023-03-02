@@ -11,27 +11,42 @@ let AuthilloInstance = Authillo(clientId: "CffyNFDb5MDQTVCkOeCyzMyMTEE1hh7SGBAQj
 
 let ScopesInstance = ScopesManager()
 
+
 class MainViewController: UIViewController {
     
     
-    @IBOutlet weak var codeChallengeLabel: UILabel!
+    @IBOutlet weak var requestUserInfoButton: UIButton!
     @IBOutlet weak var userInfoLabel: UILabel!
     
-    @IBAction func GetCodeButtonClicked(_ sender: UIButton) {
-        AuthilloInstance.GetCodeChallenge(uiCallback: { codeChallengeTxt in
-            self.codeChallengeLabel.text = "Got Code Challenge:\n\(codeChallengeTxt)"
-        })
-    }
     @IBAction func LogInClicked(_ sender: UIButton) {
-        //        AuthilloInstance.AuthorizeUser(scopes: [.license], state: "")
-                AuthilloInstance.AuthorizeUser(scopes: ScopesInstance.getActiveScopes(), state: nil, redirectURI: nil)
+        print("CHOSEN SCOPES: \(ScopesInstance.getActiveScopes())");
+        AuthilloInstance.RunLogin(scopes: ScopesInstance.getActiveScopes(), state: nil, redirectURI: nil);
     }
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        codeChallengeLabel.text = ""
+        
+        requestUserInfoButton.isHidden = true
+        
+        if let scene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            scene.initialCallback = {
+                message in DispatchQueue.main.async {
+                    self.userInfoLabel.text = message
+                }
+            }
+            
+            scene.responseCallback = {
+                responseDict in DispatchQueue.main.async {
+                    var wholeResponse = "";
+                    for (key, value) in responseDict {
+                        wholeResponse += "\(key) : \(value)\n"
+                    }
+                    self.userInfoLabel.text = wholeResponse
+                    self.requestUserInfoButton.isHidden = false
+                }
+            }
+        }
     }
 
 
