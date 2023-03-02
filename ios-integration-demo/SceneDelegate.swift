@@ -15,14 +15,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         for elem in URLContexts {
             let url = elem.url
-            print("user returned from authorization with url = ",url)
+            print("\nRETURNED FROM AUTHORIZATION WITH URL: \(url)")
             guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
             let AuthorizationCode = urlComponents.queryItems?.first(where: {$0.name == "code"})?.value
             let state = urlComponents.queryItems?.first(where: {$0.name == "state"})?.value
-            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "")
+            
+            AuthilloInstance.HandleReturnFromAuthorization(authorizationCode: AuthorizationCode ?? "", state: state ?? "", initialCallback: initialCallback, responseCallback: responseCallback)
         }
     }
-
+    var initialCallback: ((String) -> Void)?
+    var responseCallback: (([String : Any]) -> Void)?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
